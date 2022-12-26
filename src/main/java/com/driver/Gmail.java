@@ -2,18 +2,6 @@ package com.driver;
 
 import java.util.*;
 
-class Mail{
-    public Date date;
-    public String sender;
-    public String massage;
-    Mail(Date date,String sender,String massage){
-
-        this.date=date;
-        this.massage=massage;
-        this.sender=sender;
-    }
-}
-
 public class Gmail extends Email {
 
     int inboxCapacity;//maximum number of mails inbox can store
@@ -65,8 +53,10 @@ public class Gmail extends Email {
     public String findLatestMessage(){
         // If the inbox is empty, return null
         // Else, return the message of the latest mail present in the inbox
-        Mail s= inbox.get(inboxCapacity-1);
-        return s.toString();
+        if(inbox.size()<=0){
+            return null;
+        }
+        return inbox.get(inbox.size()-1).getMassage();
     }
 
     public String findOldestMessage(){
@@ -75,8 +65,7 @@ public class Gmail extends Email {
         if(inbox.size()<=0){
             return null;
         }
-        Mail s= inbox.get(0);
-        return s.toString();
+        return inbox.get(0).getMassage();
     }
 
     public int findMailsBetweenDates(Date start, Date end){
